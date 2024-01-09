@@ -119,39 +119,3 @@ class VideoTestGame extends TestGame{
 }
 
 export { PsyTestGame, VideoTestGame, TestGame };  // Export your classes
-
-/*
-runTest(){
-    while (true){
-        let tmp = prompt(`你想要回答第幾題 或是exit 離開(請輸入從 0 到 ${this.testSize -1}): `);
-
-        if (tmp.toLowerCase() === "exit"){
-            if (this.allQuestionAnswered()){
-                this.calculateScore();
-                this.showResult();
-                return;
-                } else {
-                console.log("還有沒有回答的問題!!!!!");
-                continue;
-            }
-
-        } else if (isNaN(tmp) || tmp < 0 || tmp >= this.testSize) {
-            console.log("錯誤的輸入!");
-            continue;
-        }
-
-        let testIndex = parseInt(tmp);
-        this.getTest(testIndex).display();
-
-        tmp = prompt("回答選項0, 1, 2, 3:");
-        if (isNaN(tmp) || tmp < 0 || tmp > 3) {
-            console.log("錯誤的輸入!");
-        } else {
-            let userReply = parseInt(tmp);
-            this.updateAnswer(testIndex, userReply);
-        }
-
-    }
-
-}
-*/
