@@ -105,7 +105,7 @@
         button.innerHTML = '回首頁';
         button.className="btn btn-primary";
         button.onclick=function() {
-            window.location.href = '../';
+            window.location.href = '../game.html';
         }
      }
  }
