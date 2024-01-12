@@ -11,14 +11,7 @@ var textStyle = {
     align: "center", // 對齊方式
     stroke: '#000', // 描邊顏色
     strokeThickness: 3, // 描邊厚度
-    // shadow: {
-    //     offsetX: 2, // 陰影X軸偏移量
-    //     offsetY: 2, // 陰影Y軸偏移量
-    //     color: '#000', // 陰影顏色
-    //     blur: 2, // 陰影模糊度
-    //     stroke: true, // 是否在描邊上應用陰影
-    //     fill: true // 是否在填充上應用陰影
-    // }
+
 };
 
 export class Scene extends Phaser.Scene {
@@ -52,7 +45,7 @@ export class Scene extends Phaser.Scene {
     update(){
         this.player.move(this.cursors);
 
-        if(this.player.y <= configHeight / 5 * 3.2){
+        if(this.player.y <= configHeight / 6 * 4){
             this.player.setVelocity(0);
             if(this.player.x<=configWidth / 4){
                 window.location.href = './game1/game1.html';

@@ -1,9 +1,23 @@
 import { Scene } from "./scene.js"
 
+function calculateGameSize(aspectRatioWidth, aspectRatioHeight) {
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var windowRatio = windowWidth / windowHeight;
+    var gameRatio = aspectRatioWidth / aspectRatioHeight;
+
+    if (windowRatio < gameRatio) {
+        return { width: windowWidth, height: windowWidth / gameRatio };
+    } else {
+        return { width: windowHeight * gameRatio, height: windowHeight };
+    }
+}
+var gameSize = calculateGameSize(16, 9);
+
 const config = {
     type: Phaser.AUTO,
-    width: 1024,
-    height: 600,
+    width: gameSize.width,
+    height: gameSize.height,
     parent: 'app',
     physics: {
         default: 'arcade',
