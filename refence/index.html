@@ -1,0 +1,110 @@
+<!doctype html> 
+<html> 
+    <style>
+        
+    </style>
+<head> 
+    <meta charset="UTF-8" />
+    <title>innitial</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+</head>
+
+<body>
+<div style="display: flex;justify-content: center; " id="x">12</div>
+<div style="display: flex;justify-content: center; " id="y">12</div>
+<div id="phaser-game-container"style="display: flex;justify-content: center; " id="y"></div>
+<script type="text/javascript">
+    var config = {
+        type: Phaser.AUTO,
+        width: 1024,
+        height: 1024, // Adjust if needed
+        parent: 'phaser-game-container',
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 0 },
+                debug: false
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var player;
+    var cursors;
+    var game = new Phaser.Game(config);
+    var x = document.getElementById('x');
+    var y = document.getElementById('y');
+    function preload (){
+        this.load.image('initialMap', './image/innitialMap.png');
+        this.load.image('human', './image/human.png', { frameWidth: 64, frameHeight: 64 });
+    }
+
+    function create (){
+        var style = {
+            font: "bold 32px Arial",
+            fill: "#f00", // 文字顏色
+            align: "center", // 對齊方式
+            stroke: '#000', // 描邊顏色
+            strokeThickness: 3, // 描邊厚度
+            shadow: {
+                offsetX: 2, // 陰影X軸偏移量
+                offsetY: 2, // 陰影Y軸偏移量
+                color: '#000', // 陰影顏色
+                blur: 2, // 陰影模糊度
+                stroke: true, // 是否在描邊上應用陰影
+                fill: true // 是否在填充上應用陰影
+            }
+        };
+        
+        this.add.image(0, 0, 'initialMap').setOrigin(0, 0);
+        player = this.physics.add.sprite(532, 988, 'human');
+        cursors = this.input.keyboard.createCursorKeys();
+        player.setCollideWorldBounds(true);
+        this.add.text(110, 100, '第一關', style);
+        this.add.text(360, 100, '第二關', style);
+        this.add.text(610, 100, '第三關', style);
+        this.add.text(860, 100, '遊玩紀錄', style);
+    }
+
+    function update (){
+        player.setVelocity(0);
+        if (cursors.left.isDown) {
+            player.setVelocityX(-160);
+        }
+        else if (cursors.right.isDown) {
+            player.setVelocityX(160);
+        }
+    
+        if (cursors.up.isDown) {
+            player.setVelocityY(-160);
+        }
+        else if (cursors.down.isDown) {
+            player.setVelocityY(160);
+        }
+        x.innerHTML =player.x;
+        y.innerHTML=player.y;
+        if(player.y<=674){
+            player.setVelocity(0);
+            if(player.x<=280){
+                window.location.href = './game1.html';
+            }
+            else if(player.x<=540){
+                window.location.href = './game2.html';
+            }
+            else if(player.x<=800){
+                window.location.href = './game3.html';
+            }
+            else{
+                window.location.href = './record.html';
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>
