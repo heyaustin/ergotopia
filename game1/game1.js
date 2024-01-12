@@ -27,9 +27,11 @@
  var history = document.getElementById("history");
  var clock = document.querySelector(".clock");
  var text = document.getElementById("text");
+ var button=document.getElementById("button");
  var ranRow, ranCol;
  var score = 0;
  var time=30;
+ var end=false;
  var goodBossSrc="./images/goodBoss.jpg";
  var badBossSrc="./images/badBoss.jpg";
  var officeSrc="./images/office.jpg";
@@ -43,7 +45,7 @@
      ranCol = Math.floor(Math.random() * 3);
      var moleImg = imgMap[ranRow][ranCol];
  
-     var choice= Math.floor(Math.random()*3);
+     var choice= Math.floor(Math.random()*4);
      if(choice==0){
          moleImg.src = goodBossSrc;
          map[ranRow][ranCol]=1;
@@ -67,21 +69,24 @@
      map[ranRow][ranCol]=0;
      moleImg.style.marginTop = "31px";
      moleImg.onclick = null;
-     if (time > 0) {
+     if (end==false) {
          setTimeout(update, Math.random() * 400 + 800);
      }
  }
  
  // Function to handle the mole being knocked
  function knock() {
-     if(map[ranRow][ranCol]==1) score-=2;
-     else score+=1;
+    if(end==false){
+        if(map[ranRow][ranCol]==1) score-=2;
+        else score+=1;
+
+        this.src = "./images/shang.gif";
+        this.onclick = null;
+        this.style.marginTop = "3px";
+        scoreElement.innerHTML = score;
+    }
  
-     this.src = "./images/shang.gif";
-     this.onclick = null;
-     this.style.marginTop = "3px";
- 
-     scoreElement.innerHTML = score;
+     
  }
  
  // Function to count down the game time
@@ -91,23 +96,24 @@
          setTimeout(function() { countDown(seconds - 1); }, 1000);
      } 
      else {
-         time = 0;
-         cover.style.display = "block";
-         text.innerHTML = "當前成績為：" + (score === undefined ? 0 : score) + "分<br/>遊戲結束！";
-         gameScores.level1 = score;
-                // 创建一个新的按钮元素
-                
-        let button = document.createElement('button');
+        end=true;
+        cover.style.display = "block";
+        text.innerHTML = "當前成績為：" + (score === undefined ? 0 : score) + "分<br/>遊戲結束！";
+        gameScores.level1 = score;
+        
+        button.style.display="block";
         button.innerHTML = '回首頁';
-        // 添加点击事件监听器
-        button.addEventListener('click', function() {
-            window.location.href = '../index.html';
-        });
-
-        // 将按钮添加到文档的body中
-        document.body.appendChild(button);
+        button.className="btn btn-primary";
+        button.onclick=function() {
+            window.location.href = '../';
+        }
      }
  }
- update();
- // Start the game
- countDown(time);
+
+ button.onclick=function() {
+    button.style.display="none";
+    update();
+    // Start the game
+    countDown(time);
+    button.removeEventListener('click');
+}
