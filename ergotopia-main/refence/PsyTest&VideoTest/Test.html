@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀏覽器：影片測驗！！！！！</title>
+    <style>
+        /* Add your CSS styles here if needed */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <script type="module" src="./runTest.js"></script>
+    <script type="module" src="./Class_Test.js"></script>
+    <script type="module" src="./Class_TestGame.js"></script>
+</head>
+<body>
+    <script type="module">
+        import { PsyTest, VideoTest } from './Class_Test.js';
+        import { PsyTestGame, VideoTestGame } from './Class_TestGame.js';
+        import { playGame, previousQuestion, nextQuestion, exitGame, submitAnswer, displayQuestion } from './runTest.js';
+
+
+        // 影片測驗
+        const q1 = new VideoTest("0.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"], 0, "r1", "url");
+        const q2 = new VideoTest("1.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"], 0, "r2", "url");
+        const q3 = new VideoTest("2.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"], 0, "r3", "url");
+        const q4 = new VideoTest("3.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"], 0, "r4", "url");
+        const q5 = new VideoTest("4.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"], 0, "r5", "url");
+        const game = new VideoTestGame(5, [q1, q2, q3, q4, q5]);
+
+
+        /*
+        // 心理測驗
+        const q1 = new PsyTest("0.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"]);
+        const q2 = new PsyTest("1.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"]);
+        const q3 = new PsyTest("2.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"]);
+        const q4 = new PsyTest("3.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"]);
+        const q5 = new PsyTest("4.題幹:", ["A.選項", "B.選項", "C.選項", "D.選項"]);
+        const game = new PsyTestGame(5, [q1, q2, q3, q4, q5]);
+        */
+
+        window.onload = function () {
+            playGame(game);
+        };
+
+        document.querySelector('button[data-action="previous"]').addEventListener('click', function () {
+            previousQuestion(game);
+        });
+
+        document.querySelector('button[data-action="next"]').addEventListener('click', function () {
+            nextQuestion(game);
+        });
+
+        document.querySelector('button[data-action="exit"]').addEventListener('click', function () {
+            exitGame(game);
+        });
+
+        // Add event listeners to all buttons with class "choiceBtn"
+        // Add event listeners to all buttons with class "choiceBtn"
+        const choiceButtons = document.querySelectorAll('.choiceBtn');
+        choiceButtons.forEach((button, index) => {
+            button.addEventListener('click', function () {
+                submitAnswer(game, index);
+            });
+        });
+
+    </script>
+
+    <div id="question-container">
+        <h1>標題：影片測驗</h1>
+        <p id="test-question"></p>
+        <p id="test-choices"></p>
+        <label for="answer-input">我的回答：</label>
+        <div class="buttons">
+            <button class="choiceBtn" value=0>A</button>
+            <button class="choiceBtn" value=1>B</button>
+            <button class="choiceBtn" value=2>C</button>
+            <button class="choiceBtn" value=3>D</button>
+        </div>
+        <p id="show-result"></p>
+    </div>
+
+    <button data-action="previous">上一題</button>
+    <button data-action="next">下一題</button>
+    <button data-action="exit">看結果！！！！！</button>
+</body>
+</html>

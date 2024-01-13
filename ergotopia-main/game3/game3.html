@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>心理測驗遊戲</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 10px;
+            background-color: #362FBB;
+        }
+
+        .introduction {
+            width: 40%;
+            background-color: #7998EE;
+            margin: 20px;
+            padding: 15px;
+            border-radius: 15%;
+
+        }
+        .introduction h1 {
+            margin-left: 20px;
+        }
+        .photo {
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+            border-radius: 50%;
+        }
+        .message-box {
+            width: 60%;
+            height: 85vh;
+            border: 1px solid #ccc;
+            overflow-y: scroll;
+            padding: 10px;
+            background-color:  #7998EE;
+        }
+        .message-box::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .message-box::-webkit-scrollbar-thumb {
+            background-color: #362FBB;
+            border-radius: 6px;
+        }
+
+        .message-box::-webkit-scrollbar-track {
+            background-color: #7998EE;
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options {
+            background-color: #7998EE;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            list-style-type: none;
+            transition: background-color 0.3s;
+        }
+
+        .options li:hover {
+            background-color: #f9f9f9;
+        }
+
+        #submission {
+            width: 10%;
+            height: 10%;
+            font-size: 1.5em;
+            overflow: hidden;
+            position: absolute;
+            background-color: #7998EE;
+            border-radius: 10%;
+            border: white solid 2px;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="photo" style="background-image: url('player-photo.jpg');"></div>
+        <div class = "introduction">
+            <h1>影片</h1>
+            <p>故事內容：Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure deleniti esse labore voluptas placeat. In consequuntur quis ea, nobis officia optio molestiae ducimus ratione ab quia repudiandae recusandae, qui explicabo!</p>
+        </div>
+        <div class="message-box" id="messageBox"></div>
+        <div class="photo" style="background-image: url('npc-photo.jpg');"></div>
+        <button id = "submission" onclick="calculateResult()">完成</button>
+    </div>
+
+
+    <script src="../record/score.js"></script>
+    <script>
+        // Load questions from questions.json
+        fetch('questions.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.questions && Array.isArray(data.questions)) {
+                    displayQuestions(data.questions);
+                } else {
+                    console.error('Loaded data is not an array or missing "questions" key:', data);
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+
+
+        function displayQuestions(questions) {
+            const messageBox = document.getElementById('messageBox');
+            questions.forEach(question => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div>題號：${question.id}</div>
+                    <div>${question.description}</div>
+                    <ul class="options">
+                        ${question.options.map((option, i) => `
+                            <li>
+                                <input type="radio" id="option${question.id}_${i}" name="question${question.id}" value="${i}">
+                                <label for="option${question.id}_${i}">${option}</label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                messageBox.appendChild(questionDiv);
+            });
+        }
+
+
+        function calculateResult() {
+            const scores = [0, 0, 0, 0]; // Scores for each career type
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption) {
+                    scores[selectedOption.value]++;
+                }
+            });
+
+            // Determine the highest score
+            const maxScore = Math.max(...scores);
+            const careerTypes = ['創新型或領導型職業', '分析型或專業型職業', '支持型或行政型職業', '互動型或團隊型職業'];
+            const suitableCareer = careerTypes[scores.indexOf(maxScore)];
+            gameScores.level2 = suitableCareer;
+            alert(`最適合的工作類型：${suitableCareer}`);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

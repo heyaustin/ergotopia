@@ -1,0 +1,39 @@
+// 題號、回答 都是小一號（為了不要弄亂顯示的邏輯）
+// runTest() 中 輸入0 -> 第一題 1->第二題
+// 輸入0 -> A 輸入1 -> B 輸入2 -> C 輸入3 -> D
+
+/* Test
+[Attributes]: 
+question: 題目描述 string
+choices: 選項描述 string 的 一維陣列
+
+[Function]:
+void display():  
+
+Child class: PsyTest, VideoTest
+PsyTest: =>> Test
+VideoTest:
+answer: 答案 int
+reasoning: 詳解 string
+boolean checkAnswer()
+*/
+====================================================================================================================================================================
+/*
+TestGame:
+[Attributes]: 
+testSize: 題目數量 int
+TestBank: 題目陣列 Test(PsyTest, VideoTest)[testSize]  
+userAnswers: 用戶回答 int[testSize] 原始值為全部 -1
+
+[Function]:
+int getScore(): 回傳總分
+Test getQuestion(): 回傳題目
+void updateAnswer(index, choices): 更新用戶的回答
+boolean allQuestionAnswered(): 檢查是否所有問題都被答過
+void calculateScore(): ... 根據 class不同實作
+void showResult(): ... 根據 class不同實作
+void runTest(): 大部分的遊戲邏輯
+
+Child class: PsyTestGame, VideoTestGame
+*/
+
