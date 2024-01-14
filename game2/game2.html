@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>游戏界面</title>
+    <style>
+        body {
+            background-color: #712275;
+        }
+        .container {
+            width: auto;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            background-color: #362FBB;
+        }
+
+        .photo {
+            width: 10vw;
+            height: 10vw;
+            background-color: grey;
+            text-align: center;
+            line-height: 100px;
+            margin: 10px;
+            border-radius: 30%;
+        }
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video {
+            width: 75%;
+            padding: 10px;
+            text-align: center;
+        }
+        .video iframe {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .message-box {
+            width: auto;
+            height: 30vh;
+            background-color: #F97698;
+            margin: 10px 0;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .button {
+            position: absolute;
+            bottom: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+        }
+
+        .button {
+            position: absolute;
+            bottom: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #FFB845;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #f4ddb8;
+        }
+
+        .button:active {
+            background-color: #ec9200;
+        }
+
+        .button-left {
+            left: 10px;
+        }
+
+        .button-right {
+            right: 10px;
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+
+        .options {
+            background-color: #F97698;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            list-style-type: none;
+        }
+        .options li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            list-style-type: none;
+            transition: background-color 0.3s;
+        }
+
+        .options li:hover {
+            background-color: #fff;
+        }
+        .options input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="photo">玩家照片</div>
+        <div class="video" id = "videoBox">
+        </div>
+        <div class="photo">NPC照片</div>
+    </div>
+
+    <div class="message-box" id="messageBox">
+        <!-- 题目和选项将在这里显示 -->
+    </div>
+
+    <div class="button button-left" onclick="changeQuestion(-1)">上一题</div>
+    <div class="button button-right" onclick="changeQuestion(1)">下一题</div>
+
+    <script src="../record/score.js"></script>
+    <script src="game2.js"></script>
+</body>
+</html>
