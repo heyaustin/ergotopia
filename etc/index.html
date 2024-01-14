@@ -5,7 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ergotopia</title>
 </head>
-<body>
+<style>
+    .image-container {
+        position: relative;
+        text-align: center;
+    }
     
+    .text {
+        font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        top: 40%;
+        left: 51%;
+        transform: translate(-50%, -50%);
+        color: white; /* 根據需要更改顏色 */
+        /* 可以添加更多的 CSS 來定制文字的樣式 */
+    }
+    #Image{
+        display: flex;
+        justify-content: center; 
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+</style>
+<body>
+    <a href="./game.html" >
+        <div class="image-container">
+            <img src="./images/start.jpg" alt="連結錯誤" id="Image" >
+            <div id="text"class="text">
+                <div>夢想求職國：勇闖就業仙境</div>
+                <div>點選圖片</div>
+                <div>開始遊戲</div>
+            </div>
+        </div>
+        
+    </a>
 </body>
+<script>
+
+    
+</script>
 </html>
