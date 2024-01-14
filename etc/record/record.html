@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>遊戲分數</title>
+    <style>
+        /* 您之前的 CSS 样式 */
+    </style>
+</head>
+<body>    
+    <div class="score-container">
+        <div class="level-title">第一關分數</div>
+        <div class="score" id="score1">加载中...</div>
+
+        <div class="level-title">第二關分數</div>
+        <div class="score" id="score2">加载中...</div>
+
+        <div class="level-title">第三關分數</div>
+        <div class="score" id="score3">加载中...</div>
+    </div>
+
+    <script src="score.js"></script>
+    <script>
+        // 确保 DOM 完全加载
+        document.addEventListener('DOMContentLoaded', function () {
+            // 更新分数
+            document.getElementById('score1').textContent = gameScores.level1;
+            document.getElementById('score2').textContent = gameScores.level2;
+            document.getElementById('score3').textContent = gameScores.level3;
+        });
+    </script>
+</body>
+</html>

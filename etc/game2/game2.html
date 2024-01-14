@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>游戏界面</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .photo {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 100px;
+            margin: 10px;
+        }
+
+        .video {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .message-box {
+            width: 100%;
+            height: auto;
+            background-color: #eee;
+            margin: 10px 0;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .button {
+            position: absolute;
+            bottom: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+        }
+
+        .button-left {
+            left: 10px;
+        }
+
+        .button-right {
+            right: 10px;
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin-bottom: 5px;
+            list-style-type: none;
+        }
+
+        .options input[type="checkbox"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="photo">玩家照片</div>
+        <div class="photo">NPC照片</div>
+    </div>
+    <div class="video">
+        <video width="320" height="240" controls>
+            <source src="movie.mp4" type="video/mp4">
+            您的浏览器不支持视频标签。
+        </video>
+    </div>
+    <div class="message-box" id="messageBox">
+        <!-- 题目和选项将在这里显示 -->
+        <div class="button button-left" onclick="changeQuestion(-1)">上一题</div>
+        <div class="button button-right" onclick="changeQuestion(1)">下一题</div>
+    </div>
+    <script src="../record/score.js"></script>
+    <script src="game2.js"></script>
+</body>
+</html>
