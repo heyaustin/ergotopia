@@ -21,6 +21,7 @@ pip install -r requirements.txt
 
 建立 `.env` 檔案並加入下列變數
 ```bash
+superuser_key='mypassword'
 line_token=""
 line_secret=""
 DEV=""
