@@ -28,13 +28,13 @@ DEV=""
 ```
 
 ### 運行專案
-
+Run DB migration
 ```bash
-# Run DB migration
 python3 manage.py makemigrations
 python3 manage.py migrate
-
-# Run server
+```
+Run server
+```bash
 python3 manage.py runserver
 ```
 
